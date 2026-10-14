@@ -18,7 +18,6 @@ export default function EquipmentGrid({ items, totalCount, searchActive }: Props
       if (!groups.has(category)) groups.set(category, []);
       groups.get(category)!.push(item);
     });
-    // Sort groups alphabetically
     return new Map([...groups.entries()].sort(([a], [b]) => a.localeCompare(b)));
   }, [items]);
 
@@ -31,7 +30,14 @@ export default function EquipmentGrid({ items, totalCount, searchActive }: Props
       </Typography>
 
       {items.length === 0 ? (
-        <EmptyState />
+        <Box sx={{ textAlign: 'center', py: 8 }}>
+          <Typography variant="h6" color="text.secondary" sx={{ mb: 1 }}>
+            No equipment found
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Try adjusting your search or filter criteria.
+          </Typography>
+        </Box>
       ) : (
         Array.from(grouped.entries()).map(([category, categoryItems]) => (
           <Box key={category} sx={{ mb: 4 }}>
@@ -66,19 +72,6 @@ export default function EquipmentGrid({ items, totalCount, searchActive }: Props
           </Box>
         ))
       )}
-    </Box>
-  );
-}
-
-function EmptyState() {
-  return (
-    <Box sx={{ textAlign: 'center', py: 8 }}>
-      <Typography variant="h6" color="text.secondary" sx={{ mb: 1 }}>
-        No equipment found
-      </Typography>
-      <Typography variant="body2" color="text.secondary">
-        Try adjusting your search or filter criteria.
-      </Typography>
     </Box>
   );
 }
