@@ -44,7 +44,7 @@ export default function EquipmentCard({ item }: Props) {
       }}
     >
       <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 1 }}>
-        <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.3 }}>
+        <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.3, wordBreak: 'break-word' }}>
           {item.name}
         </Typography>
 

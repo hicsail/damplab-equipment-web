@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import EquipmentCard from './EquipmentCard';
 import type { EquipmentItem } from '../types';
 import { colors } from '../theme';
@@ -52,13 +52,17 @@ export default function EquipmentGrid({ items, totalCount, searchActive }: Props
                 ({categoryItems.length})
               </Typography>
             </Typography>
-            <Grid container spacing={2}>
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr' },
+                gap: 2,
+              }}
+            >
               {categoryItems.map((item, index) => (
-                <Grid key={`${item.name}-${index}`} size={{ xs: 12, sm: 6, md: 4 }}>
-                  <EquipmentCard item={item} />
-                </Grid>
+                <EquipmentCard key={`${item.name}-${index}`} item={item} />
               ))}
-            </Grid>
+            </Box>
           </Box>
         ))
       )}

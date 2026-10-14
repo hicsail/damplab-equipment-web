@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Box, TextField, Chip, Typography, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import type { EquipmentItem } from '../types';
@@ -18,9 +18,9 @@ export default function SearchFilterBar({ items, onFiltered }: Props) {
     return Array.from(tagSet).sort();
   }, [items]);
 
-  useMemo(() => {
+  const filtered = useMemo(() => {
     const query = search.toLowerCase();
-    const filtered = items.filter((item) => {
+    return items.filter((item) => {
       const matchesTag = !selectedTag || item.tags?.includes(selectedTag);
       const matchesSearch =
         !query ||
@@ -31,8 +31,11 @@ export default function SearchFilterBar({ items, onFiltered }: Props) {
         item.location?.toLowerCase().includes(query);
       return matchesTag && matchesSearch;
     });
+  }, [search, selectedTag, items]);
+
+  useEffect(() => {
     onFiltered(filtered);
-  }, [search, selectedTag, items, onFiltered]);
+  }, [filtered, onFiltered]);
 
   return (
     <Box
