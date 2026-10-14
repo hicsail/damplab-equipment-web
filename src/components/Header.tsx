@@ -24,7 +24,7 @@ export default function Header() {
         <Link href="https://www.damplab.org" target="_blank" rel="noopener" sx={{ display: 'flex', alignItems: 'center' }}>
           <Box
             component="img"
-            src="/bu-damplab-logo.avif"
+            src={`${import.meta.env.BASE_URL}bu-damplab-logo.avif`}
             alt="BU Biological Design Center - DAMP Lab"
             sx={{ height: { xs: 32, md: 40 } }}
           />

@@ -17,7 +17,7 @@ export default function Footer() {
       <Link href="https://www.damplab.org" target="_blank" rel="noopener" sx={{ display: 'inline-block', mb: 1.5 }}>
         <Box
           component="img"
-          src="/bu-damplab-logo.avif"
+          src={`${import.meta.env.BASE_URL}bu-damplab-logo.avif`}
           alt="BU Biological Design Center - DAMP Lab"
           sx={{ height: 30, opacity: 0.5 }}
         />
