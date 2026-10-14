@@ -55,8 +55,8 @@ export default function EquipmentCard({ item }: Props) {
                 key={tag}
                 label={tag}
                 size="small"
-                color="primary"
-                sx={{ fontSize: '0.7rem', height: 22 }}
+                variant="outlined"
+                sx={{ fontSize: '0.7rem', height: 22, borderColor: '#ccc', color: 'text.secondary' }}
               />
             ))}
           </Box>
@@ -107,7 +107,7 @@ export default function EquipmentCard({ item }: Props) {
             <Chip
               label="Available for Booking"
               size="small"
-              color="secondary"
+              color="primary"
               sx={{ mt: 0.5, fontSize: '0.7rem', height: 22, alignSelf: 'flex-start' }}
             />
           )}

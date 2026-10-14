@@ -38,7 +38,7 @@ export default function EquipmentGrid({ items, totalCount, searchActive }: Props
             <Typography
               variant="h6"
               sx={{
-                color: colors.tertiary,
+                color: colors.headerBg,
                 fontWeight: 600,
                 fontSize: '1.1rem',
                 pb: 1,

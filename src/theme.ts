@@ -4,16 +4,20 @@ const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#8fb5ba',
+      main: '#d1283a',
       contrastText: '#ffffff',
     },
     secondary: {
-      main: '#e04462',
+      main: '#1a1a1a',
       contrastText: '#ffffff',
     },
     background: {
-      default: '#f4f4f4',
+      default: '#f5f5f5',
       paper: '#ffffff',
+    },
+    text: {
+      primary: '#1a1a1a',
+      secondary: '#555555',
     },
   },
   typography: {
@@ -30,7 +34,8 @@ const theme = createTheme({
 });
 
 export const colors = {
-  tertiary: '#456b6e',
+  headerBg: '#1a1a1a',
+  red: '#d1283a',
 } as const;
 
 export default theme;
