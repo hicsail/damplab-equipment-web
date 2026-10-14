@@ -1,4 +1,4 @@
-import { EquipmentItem } from './types';
+import type { EquipmentItem } from './types';
 
 const API_URL = import.meta.env.VITE_API_URL as string;
 
