@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Box, Typography, Chip } from '@mui/material';
+import { Box, Typography, Chip, Button, Menu, MenuItem } from '@mui/material';
+import DownloadIcon from '@mui/icons-material/Download';
 import { fetchEquipment } from './api';
 import type { EquipmentItem } from './types';
+import { exportXls, exportCsv, exportJson } from './export';
 import Header from './components/Header';
 import SearchFilterBar from './components/SearchFilterBar';
 import EquipmentGrid from './components/EquipmentGrid';
@@ -14,6 +16,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
 
   useEffect(() => {
     fetchEquipment()
@@ -38,6 +41,13 @@ function App() {
   }, [searched, selectedTag]);
 
   const searchActive = filtered.length !== items.length;
+
+  const handleExport = (format: 'xlsx' | 'csv' | 'json') => {
+    setMenuAnchor(null);
+    if (format === 'xlsx') exportXls(filtered);
+    else if (format === 'csv') exportCsv(filtered);
+    else exportJson(filtered);
+  };
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -72,6 +82,26 @@ function App() {
                     onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
                   />
                 ))}
+                <Box sx={{ ml: 'auto' }}>
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    startIcon={<DownloadIcon />}
+                    onClick={(e) => setMenuAnchor(e.currentTarget)}
+                    sx={{ textTransform: 'none', fontSize: '0.8rem' }}
+                  >
+                    Download
+                  </Button>
+                  <Menu
+                    anchorEl={menuAnchor}
+                    open={Boolean(menuAnchor)}
+                    onClose={() => setMenuAnchor(null)}
+                  >
+                    <MenuItem onClick={() => handleExport('xlsx')}>Excel (.xlsx)</MenuItem>
+                    <MenuItem onClick={() => handleExport('csv')}>CSV (.csv)</MenuItem>
+                    <MenuItem onClick={() => handleExport('json')}>JSON (.json)</MenuItem>
+                  </Menu>
+                </Box>
               </Box>
             </Box>
           </Box>
