@@ -28,7 +28,7 @@ jobs:
 
       - run: npm run build
         env:
-          VITE_API_URL: https://damplab-backend.sail.codes/graphql
+          VITE_API_URL: https://damplab-canvas-backend.sail.codes/graphql
 
       - uses: actions/upload-pages-artifact@v3
         with:
