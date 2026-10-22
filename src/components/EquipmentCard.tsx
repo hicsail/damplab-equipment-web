@@ -3,6 +3,7 @@ import { Card, CardContent, Typography, Chip, Box, Collapse } from '@mui/materia
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import StraightenOutlinedIcon from '@mui/icons-material/StraightenOutlined';
 import type { EquipmentItem } from '../types';
+import { getCategories } from '../utils';
 
 interface Props {
   item: EquipmentItem;
@@ -48,19 +49,17 @@ export default function EquipmentCard({ item }: Props) {
           {item.name}
         </Typography>
 
-        {item.tags && item.tags.length > 0 && (
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-            {item.tags.map((tag) => (
-              <Chip
-                key={tag}
-                label={tag}
-                size="small"
-                variant="outlined"
-                sx={{ fontSize: '0.7rem', height: 22, borderColor: '#ccc', color: 'text.secondary' }}
-              />
-            ))}
-          </Box>
-        )}
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+          {getCategories(item).map((cat) => (
+            <Chip
+              key={cat}
+              label={cat}
+              size="small"
+              variant="outlined"
+              sx={{ fontSize: '0.7rem', height: 22, borderColor: '#ccc', color: 'text.secondary' }}
+            />
+          ))}
+        </Box>
 
         {item.description && (
           <Box>

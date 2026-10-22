@@ -4,6 +4,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import { fetchEquipment } from './api';
 import type { EquipmentItem } from './types';
 import { exportXls, exportCsv, exportJson } from './export';
+import { getAllCategories, getCategories } from './utils';
 import Header from './components/Header';
 import SearchFilterBar from './components/SearchFilterBar';
 import EquipmentGrid from './components/EquipmentGrid';
@@ -29,15 +30,11 @@ function App() {
     setSearched(result);
   }, []);
 
-  const allTags = useMemo(() => {
-    const tagSet = new Set<string>();
-    items.forEach((item) => item.tags?.forEach((tag) => tagSet.add(tag)));
-    return Array.from(tagSet).sort();
-  }, [items]);
+  const allCategories = useMemo(() => getAllCategories(items), [items]);
 
   const filtered = useMemo(() => {
     if (!selectedTag) return searched;
-    return searched.filter((item) => item.tags?.includes(selectedTag));
+    return searched.filter((item) => getCategories(item).includes(selectedTag));
   }, [searched, selectedTag]);
 
   const searchActive = filtered.length !== items.length;
@@ -72,7 +69,7 @@ function App() {
                   variant={selectedTag === null ? 'filled' : 'outlined'}
                   onClick={() => setSelectedTag(null)}
                 />
-                {allTags.map((tag) => (
+                {allCategories.map((tag) => (
                   <Chip
                     key={tag}
                     label={tag}

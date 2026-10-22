@@ -1,5 +1,6 @@
 import * as XLSX from 'xlsx';
 import type { EquipmentItem } from './types';
+import { getCategories } from './utils';
 
 function formatDimensions(item: EquipmentItem): string {
   const parts: string[] = [];
@@ -14,7 +15,7 @@ function formatDimensions(item: EquipmentItem): string {
 function toRows(items: EquipmentItem[]) {
   return items.map((item) => ({
     Name: item.name || '',
-    Category: item.tags?.join(', ') || '',
+    Category: getCategories(item).join(', '),
     Description: item.description || '',
     'Model Number': item.modelNumber || '',
     Location: item.location || '',

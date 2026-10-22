@@ -3,6 +3,7 @@ import { Box, Typography } from '@mui/material';
 import EquipmentCard from './EquipmentCard';
 import type { EquipmentItem } from '../types';
 import { colors } from '../theme';
+import { getCategory } from '../utils';
 
 interface Props {
   items: EquipmentItem[];
@@ -14,7 +15,7 @@ export default function EquipmentGrid({ items, totalCount, searchActive }: Props
   const grouped = useMemo(() => {
     const groups = new Map<string, EquipmentItem[]>();
     items.forEach((item) => {
-      const category = item.tags?.[0] || 'General Equipment';
+      const category = getCategory(item);
       if (!groups.has(category)) groups.set(category, []);
       groups.get(category)!.push(item);
     });
